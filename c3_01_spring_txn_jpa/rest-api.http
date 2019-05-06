@@ -1,0 +1,38 @@
+# 获取用户列表
+GET http://localhost:8080/api/customer
+Accept: */*
+Cache-Control: no-cache
+
+
+###
+
+# 创建用户
+POST http://localhost:8080/api/customer/code HTTP/1.1
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "username": "evan",
+  "password": "123",
+  "role": "admin"
+}
+
+###
+
+# 创建另一个用户
+POST http://localhost:8080/api/customer/annotation HTTP/1.1
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "username": "messi",
+  "password": "123",
+  "role": "user"
+}
+
+###
+
+
+# referrence format: https://marketplace.visualstudio.com/items?itemName=humao.rest-client
