@@ -34,16 +34,11 @@ public class CustomerServiceTxInCode {
         try {
             customer.setUsername("Code:" + customer.getUsername());
             customerRepository.save(customer);
-            simulateError();
             transactionManager.commit(status);
             return customer;
         } catch (Exception e) {
             transactionManager.rollback(status);
             throw e;
         }
-    }
-
-    private void simulateError() {
-        throw new RuntimeException();
     }
 }
