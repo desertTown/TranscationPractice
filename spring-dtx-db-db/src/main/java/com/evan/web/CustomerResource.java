@@ -1,34 +1,25 @@
 package com.evan.web;
 
-import java.util.Map;
 
 import com.evan.domain.Order;
 import com.evan.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/customer")
 public class CustomerResource {
-	
-	@Autowired
-	private CustomerService customerService;
-	
-	@PostMapping("/order")
-	public void create(@RequestBody Order order) {
-		customerService.createOrder(order);
-	}
-	
-	@GetMapping("/{id}")
-	public Map userInfo(@PathVariable Long id) {
-		return customerService.userInfo(id);
-	}
+    @Autowired
+    private CustomerService customerService;
 
+    @PostMapping("/order")
+    private void create(@RequestBody Order order){
+        customerService.createOrder(order);
+    }
+    @GetMapping("/{id}")
+    public Map userInfo(@PathVariable Long id){
+        return customerService.userInfo(id);
+    }
 }
