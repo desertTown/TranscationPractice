@@ -35,10 +35,12 @@ public class DBConfiguration {
         return new JdbcTemplate(userDataSource);
     }
 
+    //此配置文件里加上链式事务，就可以实现类似2阶段提交了。但如果第一个事务提交成功，提交第二个事务时，服务器断掉，则数据会不一致。
     @Bean
     public PlatformTransactionManager transactionManager(){
         DataSourceTransactionManager userTM = new DataSourceTransactionManager(userDataSource());
         DataSourceTransactionManager orderTM = new DataSourceTransactionManager(orderDataSource());
+        //创建链式事务
         ChainedTransactionManager tm = new ChainedTransactionManager(userTM,orderTM);
         return tm;
     }

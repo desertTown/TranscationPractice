@@ -32,6 +32,7 @@ public class CustomerService {
         if(order.getTitle().contains("error1")){
             throw  new RuntimeException("Error1");
         }
+        //  如果在DBConfiguration中没有配置链式事务的Bean， 当上面报错时， 上面的事务会回滚， 但是下面的一句会正常执行， 不会回滚(这时候的orderJdbcTemplate没在上一个事务中)
         orderJdbcTemplate.update(SQL_CREATE_ORDER,order.getCustomerId(),order.getTitle(),order.getAmount());
         if(order.getTitle().contains("error2")){
             throw  new RuntimeException("Error2");
