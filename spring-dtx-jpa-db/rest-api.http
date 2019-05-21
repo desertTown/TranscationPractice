@@ -1,0 +1,30 @@
+# 创建一个用户
+POST http://localhost:8080/api/customer/order HTTP/1.1
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "customerId": "1",
+  "title": "new Title1 ",
+  "amount": "100"
+}
+
+###
+
+# title中加了error2， 如果程序中没有加ChainedTransactionManager管理Transaction， 那么order的数据仍然会被插入
+POST http://localhost:8080/api/customer/order HTTP/1.1
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "customerId": "1",
+  "title": "new Title1 error2",
+  "amount": "100"
+}
+
+###
+
+
+# referrence format: https://marketplace.visualstudio.com/items?itemName=humao.rest-client
