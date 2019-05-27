@@ -1,0 +1,8 @@
+drop DATABASE if exists `msg_driven_order`;
+CREATE DATABASE `msg_driven_order` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+
+drop DATABASE if exists `msg_driven_ticket`;
+CREATE DATABASE `msg_driven_ticket` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+
+drop DATABASE if exists `msg_driven_user`;
+CREATE DATABASE `msg_driven_user` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;

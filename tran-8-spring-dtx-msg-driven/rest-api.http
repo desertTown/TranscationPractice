@@ -1,0 +1,32 @@
+# order-create-new
+POST http://localhost:8082/api/order HTTP/1.1
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "customerId":"1",
+  "title":"new order",
+  "amount":"100",
+  "ticketNum":100
+}
+
+###
+
+# ticket_lock_ticket
+POST http://localhost:8083/api/ticket/lock HTTP/1.1
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+
+{
+  "customerId":"1",
+  "ticketNum":"100"
+}
+###
+
+###
+
+
+# referrence format: https://marketplace.visualstudio.com/items?itemName=humao.rest-client
