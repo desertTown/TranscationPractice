@@ -13,7 +13,7 @@ Content-Type: application/json
 
 ###
 
-# ticket_lock_ticket
+# ticket_lock_ticket  这个接口不能真正实现锁票， 因为会在多线程的情况下， 后者覆盖前者的结果
 POST http://localhost:8083/api/ticket/lock HTTP/1.1
 Accept: */*
 Cache-Control: no-cache
@@ -25,6 +25,38 @@ Content-Type: application/json
   "ticketNum":"100"
 }
 ###
+
+# 分别操作下面两条接口， 先执行完成的会update进DB， 后执行的不会覆盖
+
+# ticket_lock_ticket   这个接口能真正实现锁票， 通过SQL的幂等性方法实现
+POST http://localhost:8083/api/ticket/lock2 HTTP/1.1
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+
+{
+  "customerId":"1",
+  "ticketNum":"100"
+}
+###
+
+###
+
+# ticket_lock_ticket   这个接口能真正实现锁票， 通过SQL的幂等性方法实现
+POST http://localhost:8083/api/ticket/lock2 HTTP/1.1
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+
+{
+  "customerId":"2",
+  "ticketNum":"100"
+}
+###
+
+
 
 ###
 

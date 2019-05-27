@@ -76,6 +76,10 @@ public class TicketService {
         ticket.setLockUser(orderDTO.getCustomerId());
         ticket = ticketRepository.save(ticket);
         try {
+            // 这里主要是模拟并发的情况
+            //  设计的场景是 customerId为1和customerId为2 分别取锁这张票， 发现后完成update的会覆盖之前update的
+            // 造成覆盖的原因是因为hibernate的二级缓存。原理是第一个线程执行save操作之后， 会将结果保存在persistenceContext中，
+            // 第二个save操作再执行save操作的时候， persistenceContext就被覆盖了
             Thread.sleep(10 * 1000);
         } catch (InterruptedException e) {
             LOG.error(e.getMessage());
@@ -85,7 +89,10 @@ public class TicketService {
 
     @Transactional
     public int lockTicket2(OrderDTO orderDTO) {
+        // 数据库锁，
+        // 下面这条语句被锁了， 会一直等到这
         int updateCount = ticketRepository.lockTicket(orderDTO.getCustomerId(), orderDTO.getTicketNum());
+        // 直到第一个语句的十秒结束之后， 才会释放锁， 才会继续执行， 但是另一个线程发现这个锁的lockUser这时候已经变了，已经锁不住了，相当于没有获取到票的锁，所以就跳过了
         LOG.info("Updated ticket count:{}", updateCount);
         try {
             Thread.sleep(10 * 1000);

@@ -24,7 +24,7 @@ public class TicketResource implements TicketCompositeService {
         }
         Ticket ticket = new Ticket();
         ticket.setName("No.1");
-        ticket.setTicketNum(110L);
+        ticket.setTicketNum(100L);
         ticketRepository.save(ticket);
     }
     
