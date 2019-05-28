@@ -59,6 +59,68 @@ Content-Type: application/json
 
 
 ###
+#测试余额不足的情况， 确保DB中的customer表的余额小于100， 并且ticket表lock_user和owner都为null
+# # 结果为order会多一条失败的记录， 另外两张表不会变
+
+
+# order-create-new
+POST http://localhost:8082/api/order HTTP/1.1
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "customerId":"1",
+  "title":"new order",
+  "amount":"100",
+  "ticketNum":100
+}
+
+
+
+###
+
+
+###
+#测试锁票失败的情况， 确保ticket表中的locak_user已经有其他值了(比如为2)
+# 结果为order会多一条失败的记录， 另外两张表不会变
+
+# order-create-new
+POST http://localhost:8082/api/order HTTP/1.1
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "customerId":"1",
+  "title":"new order",
+  "amount":"100",
+  "ticketNum":100
+}
+
+
+
+###
+# 使用并发情况测试锁票 （使用postman进行2次并发测试）
+# 结果是又一次请求成功了， 一次请求失败了
+# DB数据要求初始化情况下(删除掉数据，重启程序就会生成初始化数据)
+
+# order-create-new
+POST http://localhost:8082/api/order HTTP/1.1
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{
+  "customerId":"1",
+  "title":"new order",
+  "amount":"100",
+  "ticketNum":100
+}
+
+
+
+###
 
 
 # referrence format: https://marketplace.visualstudio.com/items?itemName=humao.rest-client

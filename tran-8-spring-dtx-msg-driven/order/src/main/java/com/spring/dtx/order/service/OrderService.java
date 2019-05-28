@@ -86,9 +86,10 @@ public class OrderService {
         orderRepository.save(order);
     }
 
-    @Scheduled(fixedDelay = 10000L)
+    @Scheduled(fixedDelay = 10000L)  //这次执行完了， 隔10秒再执行一次。 和定时任务不一样， 定时任务是无论有没有执行完， 都是每10秒执行一次
     public void checkInvalidOrder() {
         ZonedDateTime checkTime = ZonedDateTime.now().minusMinutes(1L);
+        // 查找一分钟前状态为NEW的所有订单
         List<Order> orders = orderRepository.findAllByStatusAndCreatedDateBefore("NEW", checkTime);
         orders.stream().forEach(order -> {
             LOG.error("Order timeout:{}", order);
