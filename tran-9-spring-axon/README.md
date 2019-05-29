@@ -78,3 +78,7 @@ EventBus调用在这个event上注册的所有处理方法（在UnitOfWord中执
 事件Event：账户创建、存款、取款  
 将账户信息保存到数据库中，方便查询  
 查询Command：查询账户  
+
+
+
+update commit comment
