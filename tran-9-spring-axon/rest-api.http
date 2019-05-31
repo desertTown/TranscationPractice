@@ -1,0 +1,22 @@
+# createBankAccount
+POST http://localhost:8080/accounts?name=evan HTTP/1.1
+Accept: */*
+Cache-Control: no-cache
+
+
+###
+
+# depositMoney
+PUT http://localhost:8080/accounts/6ccb2913-3d26-4bbd-a2c1-0a9dba3cf20a/deposit/100 HTTP/1.1
+Accept: */*
+Cache-Control: no-cache
+
+### withdrawMoney
+PUT http://localhost:8080/accounts/6ccb2913-3d26-4bbd-a2c1-0a9dba3cf20a/withdraw/100 HTTP/1.1
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+
+# referrence format: https://marketplace.visualstudio.com/items?itemName=humao.rest-client
